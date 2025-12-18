@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>井tの補習教室</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    井tの補習教室
+</header>
+
+<main>
+    <section>
+        <h2>ワークシート</h2>
+        <ul class="worksheet-list">
+            <li><a href="sample1.pdf" target="_blank">授業1 ワークシート</a></li>
+            <li><a href="sample2.pdf" target="_blank">授業2 ワークシート</a></li>
+        </ul>
+    </section>
+
+    <section class="question-box">
+        <h2>質問フォーム</h2>
+        <form id="questionForm">
+            <input type="text" id="name" placeholder="名前" required>
+            <input type="email" id="email" placeholder="メールアドレス" required>
+            <textarea id="question" rows="4" placeholder="質問内容" required></textarea>
+            <button type="submit">送信</button>
+        </form>
+    </section>
+</main>
+
+<footer>
+    &copy; 2025 氏名
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

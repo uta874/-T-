@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+main {
+    padding: 20px;
+}
+
+.worksheet-list {
+    padding-left: 20px;
+}
+
+.worksheet-list li {
+    margin-bottom: 10px;
+}
+
+.question-box {
+    margin-top: 40px;
+}
+
+.question-box input,
+.question-box textarea,
+.question-box button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px;
+    margin-top: 40px;
+}
