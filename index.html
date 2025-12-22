@@ -21,6 +21,15 @@
 
 
 <main>
+        <!-- このページの説明 -->
+    <div class="page-description">
+        <h2>◎このページについて</h2>
+        <p>
+            このページは、授業で扱った内容を家でも復習できるように作成しています。
+            学年ごとにワークシートを分けて掲載しているので、
+            自分の学年の資料を選んで取り組んでください。
+        </p>
+    </div>
 
     <!-- ワークシート（学年別） -->
     <section>
@@ -56,16 +65,31 @@
     <!-- ページ下部 -->
     <section class="bottom-area">
 
-        <!-- 質問フォーム（左） -->
-        <div class="bottom-left">
-            <h2>質問フォーム</h2>
-            <form id="questionForm">
-                <input type="text" placeholder="名前" required>
-                <input type="email" placeholder="メールアドレス" required>
-                <textarea rows="4" placeholder="質問内容" required></textarea>
-                <button type="submit">送信</button>
-            </form>
+        <!-- 漢字クイズ（左） -->
+　　<div class="bottom-left">
+    <h2>新潟県公立高校入試の漢字に挑戦！！（10問）</h2>
+
+    <div id="quiz-area">
+        <p id="quiz-question"></p>
+        <div id="quiz-choices"></div>
+
+        <button id="next-btn">次の問題</button>
+
+        <div id="retry-area">
+            <button id="retry-same">同じ問題で再挑戦</button>
+            <button id="retry-new">問題を変えて再挑戦</button>
         </div>
+
+        <p id="quiz-result"></p>
+    </div>
+</div>
+
+　　<div id="retry-area" style="display:none;">
+    <button id="retry-same">① 同一問題リトライ（定着確認）</button>
+    <button id="retry-new">② 問題変更リトライ（実力測定）</button>
+</div>
+
+
 
         <!-- 勉強の仕方（右） -->
         <div class="bottom-right">

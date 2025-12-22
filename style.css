@@ -36,6 +36,20 @@ header {
 main {
     padding: 20px;
 }
+
+.page-description {
+    margin-top: 30px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.page-description h2 {
+    margin-top: 0;
+}
+
 /* 学年別ワークシート */
 .grade-container {
     display: flex;
@@ -78,26 +92,104 @@ main {
     box-sizing: border-box;
 }
 
-.worksheet-list {
-    padding-left: 20px;
+#quiz-area {
+    margin-top: 10px;
 }
 
-.worksheet-list li {
+#quiz-choices label {
+    display: block;
+    margin: 6px 0;
+    cursor: pointer;
+}
+
+#next-btn {
+    margin-top: 10px;
+    padding: 6px 12px;
+}
+
+#quiz-result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#retry-area {
+    margin-top: 12px;
+}
+
+#retry-area button {
+    margin-right: 8px;
+    padding: 6px 10px;
+}
+
+#quiz-choices label {
+    display: block;
+    margin: 6px 0;
+    cursor: pointer;
+}
+
+
+#quiz-question {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+#quiz-choices label {
+    font-size: 18px;
+    padding: 6px;
+}
+
+#quiz-choices input {
+    margin-right: 6px;
+    transform: scale(1.2);
+}
+
+#next-btn {
+    font-size: 16px;
+    padding: 8px 18px;
+    margin-top: 10px;
+}
+
+#retry-area {
+    margin-top: 16px;
+}
+
+#retry-area button {
+    font-size: 16px;
+    padding: 8px 14px;
+    margin-right: 10px;
+}
+
+#quiz-choices {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.quiz-btn {
+    font-size: 26px;
+    padding: 14px 20px;
+    min-width: 100px;
+    cursor: pointer;
+    border: 2px solid #444;
+    background-color: #ffffff;
+}
+
+.quiz-btn:hover {
+    background-color: #eef2f7;
+}
+
+.quiz-btn:disabled {
+    background-color: #ddd;
+    cursor: default;
+}
+
+#quiz-question {
+    font-size: 22px;
     margin-bottom: 10px;
 }
 
-.question-box {
-    margin-top: 40px;
-}
 
-.question-box input,
-.question-box textarea,
-.question-box button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    box-sizing: border-box;
-}
 
 footer {
     background-color: #f1f1f1;
