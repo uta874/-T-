@@ -19,15 +19,63 @@ header {
 
 .header-date {
     font-size: 14px;
+    text-align: right;
 }
 
-.header-date input[type="date"] {
-    margin-right: 10px;
+#month-description {
+    margin: 10px 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+    font-size: 14px;
 }
+
+
 
 
 main {
     padding: 20px;
+}
+/* 学年別ワークシート */
+.grade-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.grade-box {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fafafa;
+}
+
+.grade-box h3 {
+    text-align: center;
+}
+
+/* ページ下部レイアウト */
+.bottom-area {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.bottom-left,
+.bottom-right {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #fafafa;
+}
+
+.bottom-left input,
+.bottom-left textarea,
+.bottom-left button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px;
+    box-sizing: border-box;
 }
 
 .worksheet-list {

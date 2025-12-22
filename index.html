@@ -2,41 +2,81 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>いのTの国語おさらいラボ</title>
+    <title>いのTの国語資料室</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <div class="header-title">井tの補習教室</div>
+    <div class="header-title">いのTの国語資料室</div>
+
     <div class="header-date">
-        <label>
-            <input type="date" id="calendar">
-            <span id="wareki"></span>
-        </label>
+        <span id="wareki"></span>
+        <span id="wafuu"></span>
     </div>
 </header>
 
+<div id="month-description"></div>
+
+
 
 <main>
+
+    <!-- ワークシート（学年別） -->
     <section>
         <h2>ワークシート</h2>
-        <ul class="worksheet-list">
-            <li><a href="sample1.pdf" target="_blank">授業1 ワークシート</a></li>
-            <li><a href="sample2.pdf" target="_blank">授業2 ワークシート</a></li>
-        </ul>
+
+        <div class="grade-container">
+            <div class="grade-box">
+                <h3>中学1年</h3>
+                <ul>
+                    <li><a href="grade1_worksheet1.pdf">1年 ワークシート①</a></li>
+                    <li><a href="grade1_worksheet2.pdf">1年 ワークシート②</a></li>
+                </ul>
+            </div>
+
+            <div class="grade-box">
+                <h3>中学2年</h3>
+                <ul>
+                    <li><a href="grade2_worksheet1.pdf">2年 ワークシート①</a></li>
+                    <li><a href="grade2_worksheet2.pdf">2年 ワークシート②</a></li>
+                </ul>
+            </div>
+
+            <div class="grade-box">
+                <h3>中学3年</h3>
+                <ul>
+                    <li><a href="grade3_worksheet1.pdf">3年 ワークシート①</a></li>
+                    <li><a href="grade3_worksheet2.pdf">3年 ワークシート②</a></li>
+                </ul>
+            </div>
+        </div>
     </section>
 
-    <section class="question-box">
-        <h2>質問フォーム</h2>
-        <form id="questionForm">
-            <input type="text" id="name" placeholder="名前" required>
-            <input type="email" id="email" placeholder="メールアドレス" required>
-            <textarea id="question" rows="4" placeholder="質問内容" required></textarea>
-            <button type="submit">送信</button>
-        </form>
+    <!-- ページ下部 -->
+    <section class="bottom-area">
+
+        <!-- 質問フォーム（左） -->
+        <div class="bottom-left">
+            <h2>質問フォーム</h2>
+            <form id="questionForm">
+                <input type="text" placeholder="名前" required>
+                <input type="email" placeholder="メールアドレス" required>
+                <textarea rows="4" placeholder="質問内容" required></textarea>
+                <button type="submit">送信</button>
+            </form>
+        </div>
+
+        <!-- 勉強の仕方（右） -->
+        <div class="bottom-right">
+            <h2>国語の勉強の仕方</h2>
+            <p>※ 後で入力</p>
+        </div>
+
     </section>
+
 </main>
+
 
 <footer>
     &copy; 2025 Inoue Shota
