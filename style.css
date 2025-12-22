@@ -7,10 +7,24 @@ body {
 header {
     background-color: #4CAF50;
     color: white;
-    padding: 20px;
-    text-align: center;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
     font-size: 24px;
 }
+
+.header-date {
+    font-size: 14px;
+}
+
+.header-date input[type="date"] {
+    margin-right: 10px;
+}
+
 
 main {
     padding: 20px;
