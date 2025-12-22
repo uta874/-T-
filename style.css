@@ -14,11 +14,11 @@ header {
 }
 
 .header-title {
-    font-size: 24px;
+    font-size: 60px;
 }
 
 .header-date {
-    font-size: 14px;
+    font-size: 30px;
     text-align: right;
 }
 
@@ -42,7 +42,7 @@ main {
     padding: 15px;
     border: 1px solid #ccc;
     background-color: #f9f9f9;
-    font-size: 14px;
+    font-size: 20px;
     line-height: 1.7;
 }
 
@@ -68,7 +68,7 @@ main {
     text-align: center;
 }
 
-/* ページ下部レイアウト */
+/* ページ下部 */
 .bottom-area {
     display: flex;
     gap: 30px;
