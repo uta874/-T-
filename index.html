@@ -7,21 +7,24 @@
 </head>
 <body>
 
+<!-- ================= ヘッダー部分 ================= -->    
 <header>
     <div class="header-title">いのTの国語資料室</div>
 
+    <!-- 和暦・日付表示エリア（JavaScriptで動的表示） -->
     <div class="header-date">
         <span id="wareki"></span>
         <span id="wafuu"></span>
     </div>
 </header>
 
+<!-- 月ごとの説明文を表示するエリア -->
 <div id="month-description"></div>
 
 
 
 <main>
-        <!-- このページの説明 -->
+    <!-- ========== このページについての説明 ========== -->
     <div class="page-description">
         <h2>◎このページについて</h2>
         <p>
@@ -31,10 +34,10 @@
         </p>
     </div>
 
-    <!-- ワークシート（学年別） -->
+    <!-- ========== ワークシート一覧（学年別） ========== -->
     <section>
         <h2>★ワークシート保管庫★</h2>
-
+        <!-- 学年別ボックス全体 -->
         <div class="grade-container">
             <div class="grade-box">
                 <h3>中学1年</h3>
@@ -132,33 +135,31 @@
         </div>
     </section>
 
-    <!-- ページ下部 -->
+    
+    <!-- ================= ページ下部エリア ================= -->
     <section class="bottom-area">
 
-        <!-- 漢字クイズ（左） -->
+    <!-- ====== 左側：漢字クイズ ====== -->
 　　<div class="bottom-left">
     <h2>新潟県公立高校入試の漢字に挑戦！！（10問）</h2>
 
+    <!-- クイズ全体 -->
     <div id="quiz-area">
+        <!-- 問題文 -->
         <p id="quiz-question"></p>
+        <!-- 選択肢ボタン生成エリア -->
         <div id="quiz-choices"></div>
-
+        <!-- 次の問題へ進むボタン -->
         <button id="next-btn">次の問題</button>
-
+         <!-- 再挑戦用ボタン -->
         <div id="retry-area">
             <button id="retry-same">同じ問題で再挑戦</button>
             <button id="retry-new">問題を変えて再挑戦</button>
         </div>
-
+        <!-- 正誤結果表示 -->
         <p id="quiz-result"></p>
     </div>
 </div>
-
-　　<div id="retry-area" style="display:none;">
-    <button id="retry-same">① 同一問題リトライ（定着確認）</button>
-    <button id="retry-new">② 問題変更リトライ（実力測定）</button>
-</div>
-
 
 
         <!-- 勉強の仕方（右） -->
@@ -171,23 +172,6 @@
     <li><strong>読む力</strong>：文章の内容を正確に理解する力</li>
     <li><strong>書く力</strong>：自分の考えを言葉で表す力</li>
     <li><strong>言語の知識</strong>：漢字など、言葉の基礎を身につける力</li>
-  </ul>
-</section>
-
-<section>
-  <h2>授業をより良くする受け方</h2>
-  <ul>
-    <li>友達の発言に、あたたかい反応をする</li>
-    <li>疑問や質問を大切にし、話しやすい雰囲気をつくる</li>
-  </ul>
-</section>
-
-<section>
-  <h2>漢検に挑戦するメリット</h2>
-  <ul>
-    <li>高校・大学入試で評価される！</li>
-    <li>入学金や授業料が免除される場合がある！</li>
-    <li>入試に必要な漢字の基礎力が身につく！</li>
   </ul>
 </section>
 
@@ -213,11 +197,12 @@
 
 </main>
 
-
+<!-- ================= フッター ================= -->
 <footer>
-    &copy; 2025 Inoue Shota　わからないこと等あれば、いつでも聞いて下さい笑
+    &copy; 2025 Inoue Shota わからないこと等あれば、いつでも聞いて下さい笑
 </footer>
 
+<!-- 外部JavaScriptファイルの読み込み -->
 <script src="script.js"></script>
 </body>
 </html>
