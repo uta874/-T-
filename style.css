@@ -1,27 +1,38 @@
+/* =========================
+   全体共通設定
+========================= */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
+    font-family: Arial, sans-serif; /* 全体の基本フォント */
+    margin: 0;                      /* ブラウザ既定余白を除去 */
     padding: 0;
 }
 
+/* =========================
+   ヘッダー
+========================= */
 header {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #4CAF50;      /* ヘッダー背景色 */
+    color: white;                   /* 文字色 */
     padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex;                  /* 横並び配置 */
+    justify-content: space-between; /* 左右に配置 */
+    align-items: center;            /* 縦中央揃え */
 }
 
+/* サイトタイトル */
 .header-title {
     font-size: 60px;
 }
 
+/* 日付表示（右側） */
 .header-date {
     font-size: 30px;
     text-align: right;
 }
 
+/* =========================
+   月ごとの説明欄
+========================= */
 #month-description {
     margin: 10px 20px;
     padding: 10px;
@@ -30,35 +41,38 @@ header {
     font-size: 14px;
 }
 
-
-
-
+/* =========================
+   メインコンテンツ
+========================= */
 main {
     padding: 20px;
 }
 
+/* ページ説明文エリア */
 .page-description {
     margin-top: 30px;
     padding: 15px;
     border: 1px solid #ccc;
     background-color: #f9f9f9;
     font-size: 20px;
-    line-height: 1.7;
+    line-height: 1.7; /* 行間を広げて読みやすく */
 }
 
 .page-description h2 {
     margin-top: 0;
 }
 
-/* 学年別ワークシート */
+/* =========================
+   学年別ワークシート
+========================= */
 .grade-container {
-    display: flex;
-    gap: 20px;
+    display: flex;      /* 学年ごとに横並び */
+    gap: 20px;          /* ボックス間の余白 */
     margin-top: 20px;
 }
 
 .grade-box {
-    flex: 1;
+    flex: 1;            /* 均等幅 */
     border: 1px solid #ccc;
     padding: 10px;
     background-color: #fafafa;
@@ -68,13 +82,16 @@ main {
     text-align: center;
 }
 
-/* ページ下部 */
+/* =========================
+   ページ下部エリア
+========================= */
 .bottom-area {
     display: flex;
     gap: 30px;
     margin-top: 40px;
 }
 
+/* 左右共通枠 */
 .bottom-left,
 .bottom-right {
     flex: 1;
@@ -83,82 +100,30 @@ main {
     background-color: #fafafa;
 }
 
+/* 入力系共通設定 */
 .bottom-left input,
 .bottom-left textarea,
 .bottom-left button {
     width: 100%;
     margin-top: 10px;
     padding: 8px;
-    box-sizing: border-box;
+    box-sizing: border-box; /* padding込みで幅計算 */
 }
 
+/* =========================
+   クイズエリア
+========================= */
 #quiz-area {
     margin-top: 10px;
 }
 
-#quiz-choices label {
-    display: block;
-    margin: 6px 0;
-    cursor: pointer;
-}
-
-#next-btn {
-    margin-top: 10px;
-    padding: 6px 12px;
-}
-
-#quiz-result {
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-#retry-area {
-    margin-top: 12px;
-}
-
-#retry-area button {
-    margin-right: 8px;
-    padding: 6px 10px;
-}
-
-#quiz-choices label {
-    display: block;
-    margin: 6px 0;
-    cursor: pointer;
-}
-
-
+/* クイズの問題文 */
 #quiz-question {
-    font-size: 20px;
-    margin-bottom: 12px;
+    font-size: 22px;      /* 強調のため大きめ */
+    margin-bottom: 10px;
 }
 
-#quiz-choices label {
-    font-size: 18px;
-    padding: 6px;
-}
-
-#quiz-choices input {
-    margin-right: 6px;
-    transform: scale(1.2);
-}
-
-#next-btn {
-    font-size: 16px;
-    padding: 8px 18px;
-    margin-top: 10px;
-}
-
-#retry-area {
-    margin-top: 16px;
-}
-
-#retry-area button {
-    font-size: 16px;
-    padding: 8px 14px;
-    margin-right: 10px;
-}
-
+/* 選択肢全体（ボタン配置） */
 #quiz-choices {
     display: flex;
     justify-content: center;
@@ -166,6 +131,47 @@ main {
     margin-top: 16px;
 }
 
+/* 選択肢ラベル（ラジオ・チェック用） */
+#quiz-choices label {
+    display: block;
+    margin: 6px 0;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 6px;
+}
+
+/* ラジオボタン */
+#quiz-choices input {
+    margin-right: 6px;
+    transform: scale(1.2); /* 押しやすく */
+}
+
+/* 次へボタン */
+#next-btn {
+    font-size: 16px;
+    padding: 8px 18px;
+    margin-top: 10px;
+}
+
+/* 結果表示 */
+#quiz-result {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* 再挑戦エリア */
+#retry-area {
+    margin-top: 16px;
+}
+
+/* 再挑戦ボタン */
+#retry-area button {
+    font-size: 16px;
+    padding: 8px 14px;
+    margin-right: 10px;
+}
+
+/* クイズ用大きめボタン */
 .quiz-btn {
     font-size: 26px;
     padding: 14px 20px;
@@ -184,13 +190,9 @@ main {
     cursor: default;
 }
 
-#quiz-question {
-    font-size: 22px;
-    margin-bottom: 10px;
-}
-
-
-
+/* =========================
+   フッター
+========================= */
 footer {
     background-color: #f1f1f1;
     text-align: center;
