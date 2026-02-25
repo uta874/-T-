@@ -1,201 +1,166 @@
 /* =========================
-   全体共通設定
+   全体設定（和風ベース）
 ========================= */
 body {
-    font-family: Arial, sans-serif; /* 全体の基本フォント */
-    margin: 0;                      /* ブラウザ既定余白を除去 */
+    font-family: 'Noto Serif JP', serif;
+    margin: 0;
     padding: 0;
+    background-color: #f5f1e8; /* 和紙風 */
+    color: #2b2b2b;
+    line-height: 1.8;
+}
+body {
+    background-image: url("https://www.transparenttextures.com/patterns/washi.png");
 }
 
 /* =========================
    ヘッダー
 ========================= */
 header {
-    background-color: #4CAF50;      /* ヘッダー背景色 */
-    color: white;                   /* 文字色 */
-    padding: 15px;
-    display: flex;                  /* 横並び配置 */
-    justify-content: space-between; /* 左右に配置 */
-    align-items: center;            /* 縦中央揃え */
+    background: linear-gradient(to right, #6b2d2d, #8b3a3a);
+    color: #fff;
+    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 6px solid #c5a880;
 }
 
-/* サイトタイトル */
 .header-title {
-    font-size: 60px;
+    font-size: 52px;
+    letter-spacing: 4px;
 }
 
-/* 日付表示（右側） */
 .header-date {
-    font-size: 30px;
+    font-size: 22px;
     text-align: right;
 }
 
 /* =========================
-   月ごとの説明欄
+   月説明
 ========================= */
 #month-description {
-    margin: 10px 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #fafafa;
-    font-size: 14px;
+    margin: 20px 40px;
+    padding: 15px 20px;
+    background: #ffffffcc;
+    border-left: 6px solid #8b3a3a;
+    border-radius: 6px;
 }
 
 /* =========================
-   メインコンテンツ
+   メイン
 ========================= */
 main {
-    padding: 20px;
+    padding: 40px;
 }
 
-/* ページ説明文エリア */
+/* ページ説明 */
 .page-description {
-    margin-top: 30px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    font-size: 20px;
-    line-height: 1.7; /* 行間を広げて読みやすく */
+    padding: 25px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #e0d6c3;
 }
 
 .page-description h2 {
-    margin-top: 0;
+    border-bottom: 2px solid #c5a880;
+    padding-bottom: 5px;
 }
 
 /* =========================
-   学年別ワークシート
+   学年ボックス
 ========================= */
 .grade-container {
-    display: flex;      /* 学年ごとに横並び */
-    gap: 20px;          /* ボックス間の余白 */
-    margin-top: 20px;
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
 }
 
 .grade-box {
-    flex: 1;            /* 均等幅 */
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #fafafa;
+    flex: 1;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+    border: 1px solid #e6dcc9;
+    transition: transform 0.3s ease;
+}
+
+.grade-box:hover {
+    transform: translateY(-5px);
 }
 
 .grade-box h3 {
     text-align: center;
+    border-bottom: 2px solid #8b3a3a;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+/* リンク */
+.grade-box a {
+    text-decoration: none;
+    color: #6b2d2d;
+    transition: 0.3s;
+}
+
+.grade-box a:hover {
+    color: #b13a3a;
+    padding-left: 6px;
 }
 
 /* =========================
-   ページ下部エリア
+   下部エリア
 ========================= */
 .bottom-area {
     display: flex;
-    gap: 30px;
-    margin-top: 40px;
+    gap: 40px;
+    margin-top: 60px;
 }
 
-/* 左右共通枠 */
 .bottom-left,
 .bottom-right {
     flex: 1;
-    border: 1px solid #ccc;
-    padding: 15px;
-    background-color: #fafafa;
-}
-
-/* 入力系共通設定 */
-.bottom-left input,
-.bottom-left textarea,
-.bottom-left button {
-    width: 100%;
-    margin-top: 10px;
-    padding: 8px;
-    box-sizing: border-box; /* padding込みで幅計算 */
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+    border: 1px solid #e6dcc9;
 }
 
 /* =========================
-   クイズエリア
+   クイズ
 ========================= */
-#quiz-area {
-    margin-top: 10px;
-}
-
-/* クイズの問題文 */
 #quiz-question {
-    font-size: 22px;      /* 強調のため大きめ */
-    margin-bottom: 10px;
-}
-
-/* 選択肢全体（ボタン配置） */
-#quiz-choices {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 16px;
-}
-
-/* 選択肢ラベル（ラジオ・チェック用） */
-#quiz-choices label {
-    display: block;
-    margin: 6px 0;
-    cursor: pointer;
-    font-size: 18px;
-    padding: 6px;
-}
-
-/* ラジオボタン */
-#quiz-choices input {
-    margin-right: 6px;
-    transform: scale(1.2); /* 押しやすく */
-}
-
-/* 次へボタン */
-#next-btn {
-    font-size: 16px;
-    padding: 8px 18px;
-    margin-top: 10px;
-}
-
-/* 結果表示 */
-#quiz-result {
-    margin-top: 10px;
+    font-size: 24px;
     font-weight: bold;
 }
 
-/* 再挑戦エリア */
-#retry-area {
-    margin-top: 16px;
-}
-
-/* 再挑戦ボタン */
-#retry-area button {
-    font-size: 16px;
-    padding: 8px 14px;
-    margin-right: 10px;
-}
-
-/* クイズ用大きめボタン */
 .quiz-btn {
-    font-size: 26px;
-    padding: 14px 20px;
-    min-width: 100px;
-    cursor: pointer;
-    border: 2px solid #444;
-    background-color: #ffffff;
+    font-size: 22px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 2px solid #8b3a3a;
+    background: #fff;
+    transition: 0.3s;
 }
 
 .quiz-btn:hover {
-    background-color: #eef2f7;
-}
-
-.quiz-btn:disabled {
-    background-color: #ddd;
-    cursor: default;
+    background: #8b3a3a;
+    color: #fff;
 }
 
 /* =========================
    フッター
 ========================= */
 footer {
-    background-color: #f1f1f1;
+    background: #6b2d2d;
+    color: #fff;
     text-align: center;
-    padding: 10px;
-    margin-top: 40px;
+    padding: 20px;
+    margin-top: 60px;
+    font-size: 14px;
+    letter-spacing: 2px;
 }
