@@ -1,230 +1,266 @@
-/* =========================
-   基本設定（和風ダーク）
-========================= */
 body{
 margin:0;
 font-family:'Shippori Mincho',serif;
 background:#0b0b0b;
 color:#f2ede4;
-overflow-x:hidden;
-line-height:1.8;
 }
 
-/* 和紙風ゆらぎ背景 */
-.moving-bg{
+/* 和紙背景 */
+
+.paper-bg{
+
 position:fixed;
 inset:0;
+
 background:
-radial-gradient(circle at 30% 40%, rgba(255,255,255,0.03), transparent 40%),
-radial-gradient(circle at 70% 60%, rgba(255,255,255,0.02), transparent 40%);
-animation:bgMove 30s linear infinite alternate;
+url("https://www.transparenttextures.com/patterns/washi.png"),
+radial-gradient(circle,#1b1b1b,#070707);
+
+opacity:0.85;
+
 z-index:-2;
-}
-@keyframes bgMove{
-from{transform:translateY(0);}
-to{transform:translateY(-80px);}
+
 }
 
-/* =========================
-   ヘッダー
-========================= */
+/* 式神 */
+
+.shikigami{
+
+position:fixed;
+inset:0;
+
+background-image:url("https://upload.wikimedia.org/wikipedia/commons/3/3d/Seigaiha.svg");
+
+opacity:0.04;
+
+animation:float 80s linear infinite;
+
+z-index:-1;
+
+}
+
+@keyframes float{
+
+from{transform:translateY(0)}
+
+to{transform:translateY(-200px)}
+
+}
+
+/* ヘッダー */
+
 header{
-padding:40px 20px;
+
 text-align:center;
+
+padding:60px 20px;
+
 border-bottom:1px solid #3a2c25;
+
 }
 
 .header-title{
-font-size:52px;
-letter-spacing:4px;
-margin-bottom:10px;
+
+font-size:56px;
+
+letter-spacing:8px;
+
 }
 
-/* 墨にじみタイトル */
+/* 墨アニメ */
+
 .ink-title span{
+
 opacity:0;
-filter:blur(10px);
-transition:1.2s ease;
+
+transform:translateY(30px);
+
+transition:1s;
+
 }
+
 .ink-show{
+
 opacity:1;
-filter:blur(0);
+
+transform:translateY(0);
+
 }
 
 .header-date{
-font-size:18px;
+
 color:#d4af37;
+
+margin-top:10px;
+
 }
 
-/* =========================
-   月説明
-========================= */
+/* 月説明 */
+
 #month-description{
+
 text-align:center;
-padding:15px;
-border-bottom:1px solid #3a2c25;
+
+padding:20px;
+
 color:#e6d5a3;
+
+border-bottom:1px solid #3a2c25;
+
 }
 
-/* =========================
-   セクション共通
-========================= */
-main{
-padding:40px 5%;
+/* カード */
+
+.card{
+
+background:#141414;
+
+padding:40px;
+
+margin:50px auto;
+
+max-width:900px;
+
+border:1px solid #3a2c25;
+
+box-shadow:0 10px 40px rgba(0,0,0,0.7);
+
 }
+
+/* セクション */
 
 .section-title{
-font-size:32px;
+
+font-size:30px;
+
 border-left:4px solid #8c1c13;
-padding-left:15px;
-margin-bottom:40px;
+
+padding-left:12px;
+
+margin-bottom:30px;
+
 }
 
-/* スクロール出現 */
-.reveal{
-opacity:0;
-transform:translateY(60px);
-transition:1s ease;
-}
-.reveal.active{
-opacity:1;
-transform:translateY(0);
-}
+/* 学年 */
 
-/* =========================
-   学年ボックス
-========================= */
 .grade-container{
+
 display:flex;
-flex-wrap:wrap;
+
 gap:40px;
+
+flex-wrap:wrap;
+
 }
 
 .grade-box{
+
 flex:1;
-min-width:280px;
+
+min-width:260px;
+
 background:#141414;
-padding:25px;
+
+padding:30px;
+
 border:1px solid #3a2c25;
-transition:0.6s;
+
+transition:.4s;
+
 }
 
 .grade-box:hover{
+
 transform:translateY(-8px);
-box-shadow:0 10px 30px rgba(0,0,0,0.6);
+
+box-shadow:0 15px 30px rgba(0,0,0,0.7);
+
 }
 
-.grade-box h3{
-border-bottom:1px solid #8c1c13;
-padding-bottom:10px;
-margin-bottom:15px;
-}
-
-/* 金箔リンク */
 .grade-box a{
+
 color:#e6d5a3;
+
 text-decoration:none;
-transition:0.3s;
+
 }
+
 .grade-box a:hover{
+
 color:#d4af37;
-padding-left:6px;
+
+padding-left:5px;
+
 }
 
-/* =========================
-   下部エリア
-========================= */
-.bottom-area{
-display:flex;
-flex-wrap:wrap;
-gap:40px;
-margin-top:80px;
-}
+/* クイズ */
 
-.bottom-left,
-.bottom-right{
-flex:1;
-min-width:320px;
+.quiz-card{
+
 background:#141414;
-padding:30px;
-border:1px solid #3a2c25;
-}
 
-/* =========================
-   クイズ
-========================= */
-#quiz-question{
-font-size:28px;
-margin-bottom:20px;
+padding:40px;
+
+margin:80px auto;
+
+max-width:900px;
+
+border:1px solid #3a2c25;
+
 }
 
 .quiz-btn{
+
 font-size:22px;
-padding:12px 20px;
+
+padding:12px 18px;
+
 margin:8px;
+
 border:2px solid #8c1c13;
+
 background:transparent;
-color:#f2ede4;
+
+color:white;
+
 cursor:pointer;
-transition:0.3s;
+
 }
 
 .quiz-btn:hover{
+
 background:#8c1c13;
-}
 
-.quiz-btn.correct{
-background:#1f4d2b;
-border-color:#1f4d2b;
-}
-
-.quiz-btn.wrong{
-background:#5a1e1e;
-border-color:#5a1e1e;
-opacity:0.8;
 }
 
 #next-btn{
+
 margin-top:20px;
+
 padding:10px 20px;
+
 background:#8c1c13;
+
 border:none;
+
 color:white;
+
 cursor:pointer;
+
 }
 
-#timer{
-margin-top:15px;
-font-size:18px;
-color:#d4af37;
-}
+/* フッター */
 
-#score-board{
-margin-top:10px;
-font-size:18px;
-}
-
-#review-box{
-margin-top:20px;
-font-size:16px;
-color:#e6d5a3;
-}
-
-/* =========================
-   フッター
-========================= */
 footer{
-text-align:center;
-padding:30px;
-margin-top:60px;
-border-top:1px solid #3a2c25;
-color:#999;
-}
 
-/* =========================
-   レスポンシブ
-========================= */
-@media(max-width:768px){
-.header-title{font-size:36px;}
-.section-title{font-size:24px;}
+text-align:center;
+
+padding:30px;
+
+margin-top:60px;
+
+border-top:1px solid #3a2c25;
+
+color:#999;
+
 }
