@@ -5,18 +5,51 @@ document.querySelectorAll('.ink-title span')
 setTimeout(()=>el.classList.add('ink-show'),i*200)
 })
 
-/* スクロール */
+/* 式神生成 */
 
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting){
-e.target.classList.add("active")
+const shikigamiLayer=document.querySelector(".shikigami-layer")
+
+for(let i=0;i<10;i++){
+
+const s=document.createElement("div")
+s.className="shikigami"
+s.innerText="◇"
+s.style.left=Math.random()*100+"%"
+s.style.top=Math.random()*100+"%"
+s.style.animationDuration=20+Math.random()*20+"s"
+
+shikigamiLayer.appendChild(s)
+
 }
-})
-},{threshold:0.2})
 
-document.querySelectorAll(".reveal")
-.forEach(el=>observer.observe(el))
+
+/* 季節 */
+
+const seasonLayer=document.getElementById("season-layer")
+const month=new Date().getMonth()+1
+
+let icon=""
+
+if(month>=3&&month<=4) icon="petal"
+if(month>=9&&month<=11) icon="leaf"
+if(month===12||month<=2) icon="snow"
+
+for(let i=0;i<40;i++){
+
+const el=document.createElement("div")
+el.className=icon
+
+if(icon==="petal") el.innerText="✿"
+if(icon==="leaf") el.innerText="❁"
+if(icon==="snow") el.innerText="❄"
+
+el.style.left=Math.random()*100+"%"
+el.style.animationDuration=5+Math.random()*10+"s"
+
+seasonLayer.appendChild(el)
+
+}
+
 
 /* 和暦 */
 
@@ -49,8 +82,8 @@ const m=today.getMonth()
 
 wareki.textContent=formatter.format(today)
 wafuu.textContent=`（${wafuuData[m].name}）`
-descriptionBox.textContent=
-`${wafuuData[m].name}：${wafuuData[m].desc}`
+descriptionBox.textContent=`${wafuuData[m].name}：${wafuuData[m].desc}`
+
 
 /* クイズ */
 
@@ -66,18 +99,12 @@ const kanjiData=[
 {k:"論理",y:"ろんり"},
 {k:"表現",y:"ひょうげん"},
 {k:"普遍",y:"ふへん"},
-{k:"誠実",y:"せいじつ"},
-{k:"連続",y:"れんぞく"},
-{k:"主張",y:"しゅちょう"}
+{k:"誠実",y:"せいじつ"}
 ]
 
 let quizList=[]
-let quizIndex=0
+let index=0
 let score=0
-let combo=0
-let wrongList=[]
-let timer=10
-let interval
 
 function initQuiz(){
 
@@ -85,10 +112,8 @@ quizList=[...kanjiData]
 .sort(()=>Math.random()-0.5)
 .slice(0,QUIZ_COUNT)
 
-quizIndex=0
+index=0
 score=0
-combo=0
-wrongList=[]
 
 showQuiz()
 
@@ -96,12 +121,10 @@ showQuiz()
 
 function showQuiz(){
 
-clearInterval(interval)
-
-const q=quizList[quizIndex]
+const q=quizList[index]
 
 document.getElementById("quiz-question").textContent=
-`第${quizIndex+1}問：「${q.y}」の漢字は？`
+`第${index+1}問：「${q.y}」の漢字は？`
 
 const wrong=kanjiData
 .filter(x=>x.k!==q.k)
@@ -111,131 +134,53 @@ const wrong=kanjiData
 const choices=[q,...wrong].sort(()=>Math.random()-0.5)
 
 const box=document.getElementById("quiz-choices")
-
 box.innerHTML=""
 
 choices.forEach(v=>{
 
 const btn=document.createElement("button")
-
 btn.textContent=v.k
-
 btn.className="quiz-btn"
-
 btn.onclick=()=>answer(v.k)
 
 box.appendChild(btn)
 
 })
 
-startTimer()
-
 }
 
-function startTimer(){
+function answer(a){
 
-timer=10
+const correct=quizList[index].k
 
-document.getElementById("timer").textContent="残り"+timer+"秒"
-
-interval=setInterval(()=>{
-
-timer--
-
-document.getElementById("timer").textContent="残り"+timer+"秒"
-
-if(timer<=0){
-
-clearInterval(interval)
-
-answer(null)
-
-}
-
-},1000)
-
-}
-
-function answer(selected){
-
-clearInterval(interval)
-
-const correct=quizList[quizIndex].k
-
-document.querySelectorAll(".quiz-btn").forEach(b=>{
-
+document.querySelectorAll(".quiz-btn")
+.forEach(b=>{
 b.disabled=true
-
 if(b.textContent===correct)b.classList.add("correct")
 else b.classList.add("wrong")
-
 })
 
-if(selected===correct){
+if(a===correct) score+=10
 
-score+=10+combo*5
-combo++
-
-}else{
-
-combo=0
-wrongList.push(quizList[quizIndex])
-
-}
-
-document.getElementById("score-board").textContent=
-"Score:"+score+" Combo:"+combo
-
-}
-
-function finish(){
-
-document.getElementById("quiz-question").textContent="終了"
-document.getElementById("quiz-choices").innerHTML=""
-document.getElementById("timer").textContent=""
-
-const best=localStorage.getItem("bestScore")||0
-
-if(score>best){
-
-localStorage.setItem("bestScore",score)
-
-}
-
-document.getElementById("score-board").textContent=
-"最終Score:"+score+" / Best:"+localStorage.getItem("bestScore")
-
-if(wrongList.length>0){
-
-document.getElementById("review-box").innerHTML=
-"復習：<br>"+wrongList.map(w=>w.y+"→"+w.k).join("<br>")
-
-}else{
-
-document.getElementById("review-box").textContent=
-"全問正解！素晴らしい！"
-
-}
+document.getElementById("score-board").textContent="Score:"+score
 
 }
 
 document.getElementById("next-btn").onclick=()=>{
 
-quizIndex++
+index++
 
-if(quizIndex<quizList.length){
+if(index<quizList.length){
 
 showQuiz()
 
 }else{
 
-finish()
+document.getElementById("quiz-question").textContent="終了"
+document.getElementById("quiz-choices").innerHTML=""
 
 }
 
 }
-
-document.getElementById("retry-same").onclick=initQuiz
-document.getElementById("retry-new").onclick=initQuiz
 
 initQuiz()
