@@ -1,118 +1,56 @@
 body{
-margin:0;
 font-family:"Shippori Mincho",serif;
-background:#02040f;
-color:white;
+background:#fff7e8;
+margin:0;
+padding-bottom:80px;
 }
-
-/* 夜空 */
-
-#stars{
-position:fixed;
-inset:0;
-background:
-radial-gradient(white 1px, transparent 1px),
-radial-gradient(white 1px, transparent 1px);
-background-size:50px 50px;
-opacity:0.15;
-z-index:-3;
-}
-
-/* 桜 */
-
-#petals{
-position:fixed;
-inset:0;
-pointer-events:none;
-z-index:-2;
-}
-
-.petal{
-position:absolute;
-color:#ffb7c5;
-font-size:20px;
-animation:fall linear infinite;
-}
-
-@keyframes fall{
-0%{transform:translateY(-20px)}
-100%{transform:translateY(100vh)}
-}
-
-/* タイトル */
 
 #title{
-font-size:42px;
+font-size:48px;
 text-align:center;
-padding:20px;
-color:#ffd700;
+color:#8b0000;
 text-shadow:0 0 10px gold;
+transition:.3s;
 }
 
-/* 五芒星 */
-
-#pentagram{
-text-align:center;
-font-size:40px;
-color:#d4af37;
+#title:hover{
+transform:scale(1.05);
+text-shadow:0 0 20px gold;
 }
-
-/* 巻物メニュー */
 
 #scrollMenu{
 display:flex;
 justify-content:center;
-gap:10px;
-background:#111;
+gap:20px;
 padding:10px;
+background:#f6e5b6;
 position:sticky;
 top:0;
 }
 
 #scrollMenu a{
-color:#ffd700;
+color:#8b0000;
 text-decoration:none;
-padding:8px 12px;
-border:1px solid #555;
+font-weight:bold;
 }
-
-/* セクション */
-
-section{
-padding:20px;
-max-width:900px;
-margin:auto;
-}
-
-/* ワークシート */
-
-.grade{
-background:#111;
-padding:20px;
-margin:20px 0;
-border-radius:10px;
-}
-
-.grade a{
-color:#ffd700;
-}
-
-/* クイズ */
 
 .choice{
-background:#333;
-padding:10px;
+background:white;
+padding:12px;
 margin:10px;
+border-radius:6px;
 cursor:pointer;
+transition:.2s;
 }
 
 .choice:hover{
-background:#555;
+background:#ffe9c5;
+transform:scale(1.02);
 }
 
 button{
 background:#d4af37;
 border:none;
-padding:10px;
-margin:10px;
+padding:12px 20px;
+cursor:pointer;
 }
