@@ -1,255 +1,118 @@
 body{
 margin:0;
-font-family:'Shippori Mincho',serif;
-background:#0b0b0b;
-color:#f2ede4;
-overflow-x:hidden;
-line-height:1.8;
+font-family:"Shippori Mincho",serif;
+background:#02040f;
+color:white;
 }
 
-/* 和紙背景 */
+/* 夜空 */
 
-.paper-bg{
+#stars{
 position:fixed;
 inset:0;
 background:
-url("https://www.transparenttextures.com/patterns/washi.png"),
-radial-gradient(circle,#1a1a1a,#050505);
-opacity:0.9;
-z-index:-5;
-}
-
-/* 青海波 */
-
-.wave-bg{
-position:fixed;
-inset:0;
-background-image:url("https://upload.wikimedia.org/wikipedia/commons/3/3d/Seigaiha.svg");
-opacity:0.05;
-animation:waveMove 80s linear infinite;
-z-index:-4;
-}
-
-@keyframes waveMove{
-from{transform:translateY(0)}
-to{transform:translateY(-200px)}
-}
-
-/* 式神 */
-
-.shikigami-layer{
-position:fixed;
-inset:0;
-pointer-events:none;
+radial-gradient(white 1px, transparent 1px),
+radial-gradient(white 1px, transparent 1px);
+background-size:50px 50px;
+opacity:0.15;
 z-index:-3;
 }
 
-.shikigami{
-position:absolute;
-font-size:20px;
-opacity:.25;
-animation:float 30s linear infinite;
-}
+/* 桜 */
 
-@keyframes float{
-from{transform:translateY(0)}
-to{transform:translateY(-300px)}
-}
-
-/* 季節 */
-
-#season-layer{
+#petals{
 position:fixed;
 inset:0;
 pointer-events:none;
 z-index:-2;
 }
 
-.petal,.leaf,.snow{
+.petal{
 position:absolute;
-opacity:.7;
+color:#ffb7c5;
+font-size:20px;
 animation:fall linear infinite;
 }
 
-.petal{
-color:#ffb7c5;
-}
-
-.leaf{
-color:#ff7b3a;
-}
-
-.snow{
-color:white;
-}
-
 @keyframes fall{
-0%{transform:translateY(-50px) rotate(0)}
-100%{transform:translateY(110vh) rotate(360deg)}
-}
-
-/* ヘッダー */
-
-header{
-padding:40px 20px;
-text-align:center;
-border-bottom:1px solid #3a2c25;
+0%{transform:translateY(-20px)}
+100%{transform:translateY(100vh)}
 }
 
 /* タイトル */
 
-.header-title{
-font-size:56px;
-letter-spacing:6px;
-color:#f8f1d4;
-text-shadow:0 0 8px rgba(255,220,150,.6);
+#title{
+font-size:42px;
+text-align:center;
+padding:20px;
+color:#ffd700;
+text-shadow:0 0 10px gold;
 }
 
-/* 墨アニメ */
+/* 五芒星 */
 
-.ink-title span{
-opacity:0;
-filter:blur(8px);
-transition:1.2s;
-}
-
-.ink-show{
-opacity:1;
-filter:blur(0);
-}
-
-/* 日付 */
-
-.header-date{
-font-size:18px;
+#pentagram{
+text-align:center;
+font-size:40px;
 color:#d4af37;
 }
 
-/* 月説明 */
+/* 巻物メニュー */
 
-#month-description{
-text-align:center;
-padding:15px;
-border-bottom:1px solid #3a2c25;
-color:#e6d5a3;
+#scrollMenu{
+display:flex;
+justify-content:center;
+gap:10px;
+background:#111;
+padding:10px;
+position:sticky;
+top:0;
 }
 
-/* 巻物カード */
-
-.scroll-card,
-.page-description{
-background:#141414;
-padding:40px;
-margin:50px auto;
-max-width:900px;
-border:1px solid #3a2c25;
-box-shadow:0 10px 40px rgba(0,0,0,0.7);
+#scrollMenu a{
+color:#ffd700;
+text-decoration:none;
+padding:8px 12px;
+border:1px solid #555;
 }
 
 /* セクション */
 
-.section-title{
-font-size:32px;
-border-left:4px solid #8c1c13;
-padding-left:15px;
-margin-bottom:40px;
+section{
+padding:20px;
+max-width:900px;
+margin:auto;
 }
 
-/* 学年 */
+/* ワークシート */
 
-.grade-container{
-display:flex;
-flex-wrap:wrap;
-gap:40px;
+.grade{
+background:#111;
+padding:20px;
+margin:20px 0;
+border-radius:10px;
 }
 
-.grade-box{
-flex:1;
-min-width:280px;
-background:#141414;
-padding:25px;
-border:1px solid #3a2c25;
-transition:0.6s;
-}
-
-.grade-box:hover{
-transform:translateY(-8px);
-box-shadow:0 10px 30px rgba(0,0,0,0.6);
-}
-
-.grade-box h3{
-border-bottom:1px solid #8c1c13;
-padding-bottom:10px;
-margin-bottom:15px;
-}
-
-/* 金箔リンク */
-
-.grade-box a{
-color:#e6d5a3;
-text-decoration:none;
-transition:.3s;
-}
-
-.grade-box a:hover{
+.grade a{
 color:#ffd700;
-padding-left:6px;
-text-shadow:0 0 6px gold;
 }
 
 /* クイズ */
 
-.quiz-card{
-background:#141414;
-padding:40px;
-margin:80px auto;
-max-width:900px;
-border:1px solid #3a2c25;
-}
-
-.quiz-btn{
-font-size:22px;
-padding:12px 18px;
-margin:8px;
-border:2px solid #8c1c13;
-background:transparent;
-color:white;
+.choice{
+background:#333;
+padding:10px;
+margin:10px;
 cursor:pointer;
-transition:.3s;
 }
 
-.quiz-btn:hover{
-background:#8c1c13;
+.choice:hover{
+background:#555;
 }
 
-.quiz-btn.correct{
-background:#1f4d2b;
-}
-
-.quiz-btn.wrong{
-background:#5a1e1e;
-}
-
-#next-btn{
-margin-top:20px;
-padding:10px 20px;
-background:#8c1c13;
+button{
+background:#d4af37;
 border:none;
-color:white;
-cursor:pointer;
-}
-
-/* フッター */
-
-footer{
-text-align:center;
-padding:30px;
-margin-top:60px;
-border-top:1px solid #3a2c25;
-color:#999;
-}
-
-@media(max-width:768px){
-.header-title{font-size:36px}
-.section-title{font-size:24px}
+padding:10px;
+margin:10px;
 }
