@@ -1,55 +1,96 @@
 body{
-font-family:"Shippori Mincho",serif;
-background:#fff7e8;
 margin:0;
-padding-bottom:80px;
+font-family:'Shippori Mincho',serif;
+background:#0c0c12;
+color:#e8e3d9;
 }
+
+/* 夜空 */
+
+#stars{
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 30% 40%,rgba(255,255,255,.15),transparent 40%),
+radial-gradient(circle at 70% 60%,rgba(255,255,255,.08),transparent 40%);
+z-index:-2;
+}
+
+/* タイトル */
 
 #title{
 font-size:48px;
 text-align:center;
-color:#8b0000;
-text-shadow:0 0 10px gold;
+padding:30px;
+color:#e8e3d9;
+text-shadow:0 0 10px #d4af37;
 transition:.3s;
 }
 
 #title:hover{
-transform:scale(1.05);
-text-shadow:0 0 20px gold;
+text-shadow:0 0 20px #d4af37;
 }
 
-#scrollMenu{
-display:flex;
-justify-content:center;
-gap:20px;
-padding:10px;
-background:#f6e5b6;
-position:sticky;
-top:0;
+/* 五芒星ナビ */
+
+#pentagramNav{
+text-align:center;
+margin-bottom:20px;
 }
 
-#scrollMenu a{
-color:#8b0000;
+#pentagramNav a{
+font-size:26px;
+margin:0 10px;
+color:#d4af37;
 text-decoration:none;
-font-weight:bold;
+transition:.3s;
 }
+
+#pentagramNav a:hover{
+transform:scale(1.4);
+}
+
+/* 巻物カード */
+
+section{
+max-width:900px;
+margin:40px auto;
+padding:30px;
+background:#151520;
+border-radius:10px;
+box-shadow:0 10px 30px rgba(0,0,0,.7);
+}
+
+/* リンク */
+
+a{
+color:#e6d5a3;
+text-decoration:none;
+transition:.3s;
+}
+
+a:hover{
+color:#d4af37;
+}
+
+/* クイズ */
 
 .choice{
-background:white;
 padding:12px;
-margin:10px;
-border-radius:6px;
+margin:8px 0;
+border:1px solid #444;
 cursor:pointer;
-transition:.2s;
 }
 
 .choice:hover{
-background:#ffe9c5;
-transform:scale(1.02);
+background:#1f1f2a;
 }
 
+/* ボタン */
+
 button{
-background:#d4af37;
+background:#8c1c13;
+color:white;
 border:none;
 padding:12px 20px;
 cursor:pointer;
