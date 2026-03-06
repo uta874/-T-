@@ -9,30 +9,22 @@
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&family=Noto+Serif+JP:wght@500&display=swap" rel="stylesheet">
 
 </head>
-
 
 <body>
 
 <div id="stars"></div>
 <div id="petals"></div>
 
-
 <header>
 
 <h1 id="title">いのTの国語資料室</h1>
 
 <div id="dateArea">
-
 <span id="wareki"></span>
-<span id="wafuu"></span>
-
 </div>
-
-<div id="month-description"></div>
-
 
 <nav id="mainNav">
 
@@ -44,10 +36,7 @@
 
 </header>
 
-
-
 <main>
-
 
 <section id="worksheets">
 
@@ -131,14 +120,13 @@
 
 </section>
 
-
-
 <section id="kanjiQuiz">
 
 <h2>🎮 入試漢字クイズ</h2>
 
-<div id="kanjiQuestion"></div>
+<div class="onmyoCircle"></div>
 
+<div id="kanjiQuestion"></div>
 <div id="kanjiChoices"></div>
 
 <button onclick="nextKanji()">次の問題</button>
@@ -146,13 +134,13 @@
 </section>
 
 
-
 <section id="kokugoQuiz">
 
 <h2>🧠 国語常識クイズ</h2>
 
-<div id="quiz"></div>
+<div class="onmyoCircle"></div>
 
+<div id="quiz"></div>
 <div id="choices"></div>
 
 <button onclick="nextQuestion()">次の問題</button>
@@ -160,7 +148,6 @@
 <div id="result"></div>
 
 </section>
-
 
 </main>
 
