@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>いのTの国語資料室</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
 
 </head>
 
@@ -19,7 +18,6 @@
 
 <div id="stars"></div>
 <div id="petals"></div>
-<div id="shikigami"></div>
 
 
 <header>
@@ -27,49 +25,36 @@
 <h1 id="title">いのTの国語資料室</h1>
 
 <div id="dateArea">
+
 <span id="wareki"></span>
 <span id="wafuu"></span>
+
 </div>
 
 <div id="month-description"></div>
 
-<div id="pentagramNav">
 
-<a href="#worksheets">📜</a>
-<a href="#kanjiQuiz">🎮</a>
-<a href="#kokugoQuiz">🧠</a>
+<nav id="mainNav">
 
-</div>
+<a href="#worksheets">📜 ワークシート</a>
+<a href="#kanjiQuiz">🎮 入試漢字</a>
+<a href="#kokugoQuiz">🧠 国語常識</a>
+
+</nav>
 
 </header>
 
 
-<nav id="scrollMenu">
 
-<a href="#worksheets">ワークシート</a>
-<a href="#kanjiQuiz">入試漢字</a>
-<a href="#kokugoQuiz">国語常識</a>
-
-</nav>
-
-
-<section id="intro">
-
-<h2>◎このページについて</h2>
-
-<p>
-このページは、授業で扱った内容を家でも復習できるように作成しています。
-学年ごとにワークシートを分けて掲載しているので、
-自分の学年の資料を選んで取り組んでください。
-</p>
-
-</section>
+<main>
 
 
 <section id="worksheets">
 
 <h2>★ワークシート保管庫★</h2>
 
+
+<div class="gradeBox">
 
 <h3>中学1年</h3>
 
@@ -91,6 +76,11 @@
 
 </ul>
 
+</div>
+
+
+
+<div class="gradeBox">
 
 <h3>中学2年</h3>
 
@@ -101,8 +91,8 @@
 <li><a href="grade2/02_Synonyms_Antonyms_Polysemy_Commentary.pdf">02_類義語 解説</a></li>
 <li><a href="grade2/02_Synonyms_Antonyms_Summary.pdf">02_まとめ</a></li>
 <li><a href="grade2/02_Synonyms_Check_Test.pdf">02_確認テスト</a></li>
-<li><a href="grade2/03_Searching_Causes_of_Cicada_Increase.pdf">03_クマゼミ</a></li>
-<li><a href="grade2/04_Guide_to_Tanka_Poetry.pdf">04_短歌手引き</a></li>
+<li><a href="grade2/03_Searching_Causes_of_Cicada_Increase.pdf">03_クマゼミ増加</a></li>
+<li><a href="grade2/04_Guide_to_Tanka_Poetry.pdf">04_短歌の手引き</a></li>
 <li><a href="grade2/04_Tanka_Poetry.pdf">04_短歌</a></li>
 <li><a href="grade2/04_Tanka_Techniques_1-3_Answers_All.pdf">04_短歌解答</a></li>
 <li><a href="grade2/04_Tanka_Techniques_1-3_Print_All.pdf">04_短歌印刷</a></li>
@@ -112,6 +102,11 @@
 
 </ul>
 
+</div>
+
+
+
+<div class="gradeBox">
 
 <h3>中学3年</h3>
 
@@ -132,7 +127,10 @@
 
 </ul>
 
+</div>
+
 </section>
+
 
 
 <section id="kanjiQuiz">
@@ -140,13 +138,13 @@
 <h2>🎮 入試漢字クイズ</h2>
 
 <div id="kanjiQuestion"></div>
+
 <div id="kanjiChoices"></div>
 
 <button onclick="nextKanji()">次の問題</button>
 
-<div id="kanjiScore"></div>
-
 </section>
+
 
 
 <section id="kokugoQuiz">
@@ -154,20 +152,17 @@
 <h2>🧠 国語常識クイズ</h2>
 
 <div id="quiz"></div>
+
 <div id="choices"></div>
 
 <button onclick="nextQuestion()">次の問題</button>
 
 <div id="result"></div>
 
-<div id="omikuji"></div>
-
-<h3>🏆 ランキング</h3>
-
-<ol id="ranking"></ol>
-
 </section>
 
+
+</main>
 
 <script src="script.js"></script>
 
