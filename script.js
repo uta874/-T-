@@ -1,125 +1,85 @@
-/* ===== 全体を少し高級感ある表示に ===== */
+/* 和暦 */
+const formatter = new Intl.DateTimeFormat(
+"ja-JP-u-ca-japanese",
+{era:"long",year:"numeric",month:"numeric",day:"numeric"}
+);
 
-main{
-max-width:1100px;
-margin:auto;
-padding:20px;
+document.getElementById("wareki").textContent =
+formatter.format(new Date());
+
+/* 今日の一問 */
+const dailyQ = [
+["徒然草の作者は？","吉田兼好"],
+["枕草子の作者は？","清少納言"],
+["俳句の音数は？","5-7-5"],
+["奥の細道の作者は？","松尾芭蕉"]
+];
+
+let dq = dailyQ[Math.floor(Math.random()*dailyQ.length)];
+document.getElementById("dailyQuestion").innerHTML =
+dq[0] + "<br>答え：" + dq[1];
+
+/* 名言 */
+const quotes = [
+"人間失格 — 太宰治",
+"こころ — 夏目漱石",
+"羅生門 — 芥川龍之介",
+"山月記 — 中島敦"
+];
+
+document.getElementById("quoteBox").innerHTML =
+quotes[Math.floor(Math.random()*quotes.length)];
+
+/* 漢字クイズ */
+const kanji = [
+["とうそつ","統率"],
+["しんちょう","慎重"],
+["たいしょう","対象"]
+];
+
+let k = 0;
+
+function showKanji(){
+document.getElementById("kanjiQuestion").innerHTML =
+"「"+kanji[k][0]+"」の漢字は？";
+
+let choices = [kanji[k][1]];
+while(choices.length<3){
+let r = kanji[Math.floor(Math.random()*kanji.length)][1];
+if(!choices.includes(r)) choices.push(r);
+}
+choices.sort(()=>Math.random()-0.5);
+
+let html="";
+choices.forEach(c=>{
+html += `<div class="choice" onclick="checkKanji('${c}')">${c}</div>`;
+});
+document.getElementById("kanjiChoices").innerHTML = html;
 }
 
-/* セクションタイトル */
-h2{
-text-align:center;
-margin-top:60px;
-margin-bottom:30px;
-font-size:28px;
-letter-spacing:3px;
-color:#e8d6a0;
-position:relative;
+function checkKanji(c){
+if(c===kanji[k][1]){
+document.getElementById("kanjiResult").innerHTML="⭕ 正解";
+}else{
+document.getElementById("kanjiResult").innerHTML="❌ 正解は "+kanji[k][1];
+}
 }
 
-h2::after{
-content:"";
-display:block;
-width:120px;
-height:1px;
-background:gold;
-margin:10px auto;
+function nextKanji(){
+k++;
+if(k>=kanji.length) k=0;
+showKanji();
 }
+showKanji();
 
-/* ワークシートの箱をカード風に */
-.gradeBox{
-background:linear-gradient(135deg,#f5e6c8,#e8d6a0);
-color:#000;
-padding:20px;
-border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.5);
-width:260px;
-transition:transform 0.3s, box-shadow 0.3s;
-position:relative;
+/* スクロール表示 */
+const fade = document.querySelectorAll(".fade");
+window.addEventListener("scroll", ()=>{
+fade.forEach(el=>{
+let rect = el.getBoundingClientRect().top;
+if(rect < window.innerHeight-100){
+el.style.opacity=1;
+el.style.transform="translateY(0)";
 }
-
-/* 和風カード風の飾り */
-.gradeBox::before{
-content:"";
-position:absolute;
-top:5px;
-left:5px;
-right:5px;
-bottom:5px;
-border:1px solid rgba(0,0,0,0.2);
-border-radius:10px;
-pointer-events:none;
-}
-
-.gradeBox:hover{
-transform:translateY(-8px);
-box-shadow:0 20px 40px rgba(0,0,0,0.7);
-}
-
-/* リンクを和風ボタン風に */
-.gradeBox a{
-text-decoration:none;
-color:#000;
-padding:4px 6px;
-border-radius:4px;
-transition:background 0.2s;
-}
-
-.gradeBox a:hover{
-background:rgba(0,0,0,0.1);
-}
-
-/* ナビボタンを少し高級感 */
-#mainNav a{
-margin:10px;
-padding:12px 24px;
-background:linear-gradient(145deg,#1a1a22,#0f0f15);
-border:1px solid #c8a95a;
-border-radius:10px;
-color:#e8d6a0;
-text-decoration:none;
-box-shadow:0 5px 15px rgba(0,0,0,0.5);
-transition:all 0.3s;
-}
-
-#mainNav a:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 25px rgba(0,0,0,0.8);
-}
-
-/* クイズ部分をカード化 */
-#kanjiQuiz, #kokugoQuiz{
-background:rgba(20,20,30,0.6);
-padding:30px;
-margin:40px 0;
-border-radius:15px;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
-}
-
-/* 選択肢をボタン風に */
-.choice{
-padding:14px;
-margin:10px auto;
-border:1px solid #444;
-cursor:pointer;
-text-align:center;
-max-width:300px;
-border-radius:8px;
-background:rgba(0,0,0,0.3);
-transition:all 0.2s;
-}
-
-.choice:hover{
-background:#2a2a38;
-transform:scale(1.05);
-}
-
-/* フッター */
-footer{
-text-align:center;
-padding:30px;
-color:#888;
-font-size:14px;
-border-top:1px solid #333;
-margin-top:40px;
-}
+});
+});
