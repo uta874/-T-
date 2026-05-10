@@ -1,114 +1,99 @@
-body{
-margin:0;
-background:#0b0b0f;
-font-family:'Shippori Mincho',serif;
-color:#e8e4da;
+const formatter = new Intl.DateTimeFormat(
+  "ja-JP-u-ca-japanese",
+  { era:"long", year:"numeric", month:"numeric", day:"numeric", weekday:"long" }
+);
+
+document.getElementById("wareki").textContent = formatter.format(new Date());
+
+const dailyQ = [
+  ["徒然草の作者は？","吉田兼好"],
+  ["枕草子の作者は？","清少納言"],
+  ["俳句の音数は？","5-7-5"],
+  ["奥の細道の作者は？","松尾芭蕉"],
+  ["竹取物語の主人公は？","かぐや姫"],
+  ["『走れメロス』の作者は？","太宰治"]
+];
+
+const quotes = [
+  "学ぶとは、言葉で世界を少し明るく見ること。",
+  "読む力は、考える力の入口である。",
+  "一語を選ぶことは、一つの景色を選ぶこと。",
+  "古典は、昔の人から届いた長い手紙である。"
+];
+
+const kanji = [
+  ["とうそつ","統率"],
+  ["しんちょう","慎重"],
+  ["たいしょう","対象"],
+  ["けんとう","検討"],
+  ["しょうさい","詳細"],
+  ["はあく","把握"],
+  ["かくしん","確信"],
+  ["ていあん","提案"]
+];
+
+const kokugoQuestions = [
+  {
+    question:"物語の出来事が起こる時間や場所のことを何という？",
+    answer:"設定",
+    choices:["設定","主題","比喩"]
+  },
+  {
+    question:"『白い雲のようだ』のように、たとえる言い方は？",
+    answer:"直喩",
+    choices:["直喩","倒置","反復"]
+  },
+  {
+    question:"文章全体を通して筆者が最も伝えたいことは？",
+    answer:"要旨",
+    choices:["要旨","段落","接続語"]
+  },
+  {
+    question:"反対の意味をもつ語の組み合わせは？",
+    answer:"対義語",
+    choices:["対義語","類義語","多義語"]
+  }
+];
+
+const kobunWords = [
+  {
+    question:"『いと』の意味は？",
+    answer:"とても",
+    choices:["とても","少し","すぐに"]
+  },
+  {
+    question:"『をかし』の意味は？",
+    answer:"趣がある",
+    choices:["趣がある","悲しい","眠い"]
+  },
+  {
+    question:"『あはれ』の意味は？",
+    answer:"しみじみとした趣",
+    choices:["しみじみとした趣","速い","正しい"]
+  },
+  {
+    question:"『ありがたし』の意味は？",
+    answer:"めったにない",
+    choices:["めったにない","ありがとう","簡単だ"]
+  }
+];
+
+let k = 0;
+let q = 0;
+let b = 0;
+const badgeSet = new Set();
+
+function pickDaily(){
+  const dq = dailyQ[Math.floor(Math.random() * dailyQ.length)];
+  document.getElementById("dailyQuestion").innerHTML =
+    `<span>${dq[0]}</span><span class="answerLine">答え：${dq[1]}</span>`;
 }
 
-/* 星 */
-#stars{
-position:fixed;
-width:100%;
-height:100%;
-background:url("https://www.transparenttextures.com/patterns/stardust.png");
-opacity:0.3;
-z-index:-3;
+function pickQuote(){
+  document.getElementById("quoteBox").textContent =
+    quotes[Math.floor(Math.random() * quotes.length)];
 }
 
-/* タイトル */
-#title{
-text-align:center;
-font-size:48px;
-margin-top:40px;
-color:#e8d6a0;
-text-shadow:0 0 15px gold;
-}
-
-.topDescription{
-text-align:center;
-max-width:700px;
-margin:20px auto;
-line-height:1.8;
-}
-
-/* ナビ */
-#mainNav{
-text-align:center;
-margin:30px;
-}
-
-#mainNav a{
-margin:10px;
-padding:12px 20px;
-background:#14141c;
-border:1px solid #c8a95a;
-border-radius:8px;
-color:#e8d6a0;
-text-decoration:none;
-}
-
-/* セクション */
-main{
-max-width:1100px;
-margin:auto;
-padding:20px;
-}
-
-h2{
-text-align:center;
-margin-top:60px;
-color:#e8d6a0;
-}
-
-/* ワークシート */
-.scrollBox{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-justify-content:center;
-}
-
-.gradeBox{
-background:#f5e6c8;
-color:#000;
-padding:20px;
-border-radius:10px;
-width:260px;
-box-shadow:0 10px 20px rgba(0,0,0,0.5);
-}
-
-/* クイズ */
-.choice{
-padding:14px;
-margin:10px auto;
-border:1px solid #444;
-cursor:pointer;
-text-align:center;
-max-width:300px;
-border-radius:8px;
-background:#1e1e27;
-}
-
-button{
-background:#8c1c13;
-border:none;
-color:white;
-padding:10px 20px;
-cursor:pointer;
-display:block;
-margin:20px auto;
-}
-
-/* フェード */
-.fade{
-opacity:0;
-transform:translateY(40px);
-transition:1s;
-}
-
-/* フッター */
-footer{
-text-align:center;
-padding:30px;
-color:#888;
+function shuffle(items){
+  return [...items].sort(() => Math.random() - 0.5);
 }

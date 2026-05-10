@@ -4,31 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>いのTの国語資料室</title>
-
 <meta name="description" content="中学生向け国語学習サイト。ワークシート、入試漢字、国語常識クイズ、古文単語など、授業や受験対策に使える無料教材サイト。">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
+<div id="stars" aria-hidden="true"></div>
+<div id="petals" aria-hidden="true"></div>
 
-<div id="stars"></div>
-<div id="petals"></div>
-
-<header>
+<header class="hero">
+<div class="heroInner">
+<p class="eyebrow">中学生のための国語学習サイト</p>
 <h1 id="title">いのTの国語資料室</h1>
-
 <p class="topDescription">
-このサイトは中学生向けの国語学習サイトです。<br>
-ワークシート・入試漢字・国語常識・古文単語などをまとめています。
+ワークシート・入試漢字・国語常識・古文単語を、授業にも受験対策にも使いやすくまとめました。
 </p>
 
-<div id="dateArea">
+<div id="dateArea" aria-label="今日の日付">
+<span class="dateLabel">本日</span>
 <span id="wareki"></span>
 </div>
 
-<nav id="mainNav">
+<nav id="mainNav" aria-label="メインメニュー">
 <a href="#daily">今日の一問</a>
 <a href="#worksheets">ワークシート</a>
 <a href="#kanjiQuiz">入試漢字</a>
@@ -36,25 +36,30 @@
 <a href="#kobunQuiz">古文単語</a>
 <a href="#badge">バッジ</a>
 </nav>
+</div>
 </header>
 
 <main>
-
-<section id="daily" class="fade">
-<h2>◆ 今日の一問 ◆</h2>
-<div id="dailyQuestion"></div>
+<section id="daily" class="fade featureGrid" aria-labelledby="dailyTitle">
+<div>
+<p class="sectionKicker">Daily Question</p>
+<h2 id="dailyTitle">今日の一問</h2>
+</div>
+<div id="dailyQuestion" class="questionCard"></div>
 </section>
 
-<section id="quote" class="fade">
-<h2>◆ 文学者の言葉 ◆</h2>
-<div id="quoteBox"></div>
+<section id="quote" class="fade quoteSection" aria-labelledby="quoteTitle">
+<p class="sectionKicker">Literature</p>
+<h2 id="quoteTitle">文学者の言葉</h2>
+<div id="quoteBox" class="quoteBox"></div>
 </section>
 
-<section id="worksheets" class="fade">
-<h2>★ワークシート保管庫★</h2>
+<section id="worksheets" class="fade" aria-labelledby="worksheetsTitle">
+<p class="sectionKicker">Archive</p>
+<h2 id="worksheetsTitle">ワークシート保管庫</h2>
+<p class="sectionLead">学年ごとに教材を整理しています。必要なPDFを選んで開いてください。</p>
 
 <div class="scrollBox">
-
 <div class="gradeBox">
 <h3>中学1年</h3>
 <ul>
@@ -110,42 +115,47 @@
 <li><a href="grade3/12_Summarization_Practice_Answer_Sample.pdf">12_解答例</a></li>
 </ul>
 </div>
-
 </div>
 </section>
 
-<section id="kanjiQuiz" class="fade">
-<h2>入試漢字クイズ</h2>
-<div id="kanjiQuestion"></div>
-<div id="kanjiChoices"></div>
-<div id="kanjiResult"></div>
-<button onclick="nextKanji()">次の問題</button>
+<section class="quizGrid">
+<article id="kanjiQuiz" class="fade quizPanel" aria-labelledby="kanjiTitle">
+<p class="sectionKicker">Entrance Exam</p>
+<h2 id="kanjiTitle">入試漢字クイズ</h2>
+<div id="kanjiQuestion" class="quizQuestion"></div>
+<div id="kanjiChoices" class="choices"></div>
+<div id="kanjiResult" class="result" aria-live="polite"></div>
+<button type="button" onclick="nextKanji()">次の問題</button>
+</article>
+
+<article id="kokugoQuiz" class="fade quizPanel" aria-labelledby="kokugoTitle">
+<p class="sectionKicker">Knowledge</p>
+<h2 id="kokugoTitle">国語常識クイズ</h2>
+<div id="quiz" class="quizQuestion"></div>
+<div id="choices" class="choices"></div>
+<div id="result" class="result" aria-live="polite"></div>
+<button type="button" onclick="nextQuestion()">次の問題</button>
+</article>
+
+<article id="kobunQuiz" class="fade quizPanel" aria-labelledby="kobunTitle">
+<p class="sectionKicker">Classics</p>
+<h2 id="kobunTitle">古文単語クイズ</h2>
+<div id="kobunQ" class="quizQuestion"></div>
+<div id="kobunChoices" class="choices"></div>
+<div id="kobunResult" class="result" aria-live="polite"></div>
+<button type="button" onclick="nextKobun()">次の問題</button>
+</article>
 </section>
 
-<section id="kokugoQuiz" class="fade">
-<h2>国語常識クイズ</h2>
-<div id="quiz"></div>
-<div id="choices"></div>
-<div id="result"></div>
-<button onclick="nextQuestion()">次の問題</button>
-</section>
-
-<section id="kobunQuiz" class="fade">
-<h2>古文単語クイズ</h2>
-<div id="kobunQ"></div>
-<div id="kobunChoices"></div>
-<button onclick="nextKobun()">次の問題</button>
-</section>
-
-<section id="badge" class="fade">
-<h2>取得バッジ</h2>
+<section id="badge" class="fade badgeSection" aria-labelledby="badgeTitle">
+<p class="sectionKicker">Achievement</p>
+<h2 id="badgeTitle">取得バッジ</h2>
 <div id="badgeArea">なし</div>
 </section>
 
 <div class="topButton">
 <a href="#title">▲ トップへ戻る</a>
 </div>
-
 </main>
 
 <footer>
