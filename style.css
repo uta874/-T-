@@ -1,100 +1,809 @@
-const warekiFormatter = new Intl.DateTimeFormat(
-  "ja-JP-u-ca-japanese",
-  { era:"long", year:"numeric", month:"long", day:"numeric", weekday:"long" }
-);
-
-const kyurekiFormatter = new Intl.DateTimeFormat(
-  "ja-JP-u-ca-chinese",
-  { year:"numeric", month:"long", day:"numeric" }
-);
-
-const today = new Date();
-const wareki = warekiFormatter.format(today);
-let kyureki = "";
-
-try{
-  kyureki = kyurekiFormatter.format(today);
-}catch(error){
-  kyureki = "表示に対応していません";
+:root{
+  --ink:#2f2630;
+  --soft-ink:#6c5866;
+  --violet:#8f6ab3;
+  --violet-deep:#634281;
+  --sakura:#f6b6c8;
+  --sakura-pale:#ffe6ee;
+  --fuji:#d9ccff;
+  --paper:#fffaf0;
+  --paper-warm:#fff0cf;
+  --gold:#c99a2e;
+  --gold-light:#ffe59c;
+  --green:#5b8b75;
+  --red:#b24b55;
+  --white:#ffffff;
+  --shadow:0 22px 54px rgba(116,78,115,.18);
+  --shadow-strong:0 28px 70px rgba(100,64,110,.28);
 }
 
-document.getElementById("wareki").textContent = wareki;
-document.getElementById("kyureki").textContent = kyureki;
-document.getElementById("kyurekiLarge").textContent = kyureki;
+*{box-sizing:border-box}
 
-const dailyQ = [
-  ["徒然草の作者は？","吉田兼好","随筆文学の代表作です。"],
-  ["枕草子の作者は？","清少納言","平安時代の感性を知る入口になります。"],
-  ["俳句の基本的な音数は？","5・7・5","季語が入ることも大切です。"],
-  ["奥の細道の作者は？","松尾芭蕉","俳諧紀行文として有名です。"],
-  ["竹取物語の主人公は？","かぐや姫","日本最古級の物語とされます。"],
-  ["『走れメロス』の作者は？","太宰治","友情と信頼が主題として読まれます。"],
-  ["『山月記』の主人公は？","李徴","人間の自尊心や不安を考える作品です。"],
-  ["短歌の基本的な音数は？","5・7・5・7・7","和歌の学習にもつながります。"]
-];
+html{
+  scroll-behavior:smooth;
+}
 
-const literaryQuotes = [
-  {
-    text:"吾輩は猫である。名前はまだ無い。",
-    meta:"夏目漱石『吾輩は猫である』"
-  },
-  {
-    text:"山路を登りながら、こう考えた。",
-    meta:"夏目漱石『草枕』"
-  },
-  {
-    text:"メロスは激怒した。",
-    meta:"太宰治『走れメロス』"
-  },
-  {
-    text:"恥の多い生涯を送って来ました。",
-    meta:"太宰治『人間失格』"
-  },
-  {
-    text:"隴西の李徴は博学才穎、天宝の末年、若くして名を虎榜に連ねた。",
-    meta:"中島敦『山月記』"
-  },
-  {
-    text:"或日の暮方の事である。",
-    meta:"芥川龍之介『羅生門』"
-  },
-  {
-    text:"石炭をば早や積み果てつ。",
-    meta:"森鴎外『舞姫』"
-  },
-  {
-    text:"やまなし、やまなし、やまなし。",
-    meta:"宮沢賢治『やまなし』"
-  },
-  {
-    text:"春はあけぼの。",
-    meta:"清少納言『枕草子』"
-  },
-  {
-    text:"つれづれなるままに、日暮らし、硯にむかひて。",
-    meta:"吉田兼好『徒然草』"
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--ink);
+  font-family:"Noto Sans JP",sans-serif;
+  line-height:1.8;
+  background:
+    radial-gradient(circle at 12% 6%,rgba(255,229,156,.75),transparent 24%),
+    radial-gradient(circle at 88% 12%,rgba(246,182,200,.62),transparent 28%),
+    radial-gradient(circle at 74% 78%,rgba(217,204,255,.62),transparent 34%),
+    linear-gradient(135deg,#fff8e6 0%,#fff1f5 42%,#f4edff 100%);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-5;
+  background:
+    linear-gradient(90deg,rgba(201,154,46,.08) 1px,transparent 1px),
+    linear-gradient(rgba(201,154,46,.07) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.8),rgba(0,0,0,.16));
+}
+
+a{
+  color:inherit;
+}
+
+#skyPattern{
+  position:fixed;
+  inset:0;
+  z-index:-4;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle at center,rgba(255,255,255,.85) 0 2px,transparent 2.8px),
+    radial-gradient(circle at center,rgba(201,154,46,.45) 0 1px,transparent 1.8px);
+  background-size:150px 150px,94px 94px;
+  opacity:.5;
+}
+
+#floatingObjects,#petals{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:-1;
+}
+
+.floatObject{
+  position:absolute;
+  width:92px;
+  height:54px;
+  border-radius:54px 54px 10px 10px;
+  background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(255,222,234,.72));
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 16px 34px rgba(143,106,179,.16);
+  animation:floatAcross linear infinite;
+}
+
+.floatObject::before,.floatObject::after{
+  content:"";
+  position:absolute;
+  bottom:8px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(255,255,255,.88);
+}
+
+.floatObject::before{left:13px}
+.floatObject::after{right:13px}
+
+.petal{
+  position:absolute;
+  top:-48px;
+  width:13px;
+  height:20px;
+  border-radius:13px 2px 13px 2px;
+  background:linear-gradient(135deg,#f49abb,#fff1f5 70%);
+  box-shadow:0 5px 12px rgba(178,75,85,.15);
+  opacity:.78;
+  animation:petalFall linear infinite;
+}
+
+@keyframes petalFall{
+  from{transform:translate3d(0,-50px,0) rotate(0deg)}
+  to{transform:translate3d(var(--drift),110vh,0) rotate(420deg)}
+}
+
+@keyframes floatAcross{
+  from{transform:translateX(-20vw) translateY(0)}
+  50%{transform:translateX(50vw) translateY(-18px)}
+  to{transform:translateX(120vw) translateY(8px)}
+}
+
+.hero{
+  position:relative;
+  min-height:82vh;
+  display:grid;
+  place-items:center;
+  padding:54px 20px 36px;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:"雅";
+  position:absolute;
+  right:clamp(16px,8vw,120px);
+  top:24px;
+  color:rgba(143,106,179,.11);
+  font-family:"Shippori Mincho",serif;
+  font-size:clamp(140px,25vw,300px);
+  font-weight:700;
+  writing-mode:vertical-rl;
+  line-height:1;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-70px;
+  width:min(980px,92vw);
+  height:180px;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse at center,rgba(255,255,255,.92),transparent 67%);
+  filter:blur(8px);
+}
+
+.moonObject{
+  position:absolute;
+  left:clamp(20px,8vw,120px);
+  top:68px;
+  width:126px;
+  height:126px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#fffdf1 0 22%,#ffe59c 55%,#e4b849 100%);
+  box-shadow:0 0 70px rgba(255,229,156,.8),0 18px 42px rgba(201,154,46,.22);
+  animation:moonFloat 7s ease-in-out infinite;
+}
+
+.moonObject::after{
+  content:"";
+  position:absolute;
+  inset:18px -10px 0 42px;
+  border-radius:50%;
+  background:rgba(255,248,230,.74);
+}
+
+@keyframes moonFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-14px)}
+}
+
+.heroInner{
+  position:relative;
+  z-index:1;
+  width:min(1020px,100%);
+  text-align:center;
+  padding:42px 24px 32px;
+}
+
+.eyebrow,.sectionKicker{
+  margin:0 0 10px;
+  color:var(--violet-deep);
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+#title{
+  margin:0;
+  font-family:"Shippori Mincho",serif;
+  font-size:clamp(44px,8vw,92px);
+  line-height:1.14;
+  color:#5d3577;
+  text-shadow:0 5px 0 rgba(255,255,255,.74),0 20px 42px rgba(143,106,179,.24);
+}
+
+.topDescription{
+  max-width:810px;
+  margin:22px auto 0;
+  color:#4e4150;
+  font-size:clamp(16px,2vw,19px);
+  font-weight:500;
+}
+
+.dateRibbon{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin:28px auto 0;
+}
+
+.dateRibbon div{
+  display:inline-flex;
+  gap:10px;
+  align-items:center;
+  padding:9px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.76);
+  border:1px solid rgba(201,154,46,.34);
+  box-shadow:0 12px 30px rgba(143,106,179,.14);
+  backdrop-filter:blur(8px);
+}
+
+.dateLabel{
+  min-width:42px;
+  text-align:center;
+  color:#fff;
+  background:linear-gradient(135deg,var(--violet),#c86d9d);
+  border-radius:999px;
+  padding:2px 10px;
+  font-size:12px;
+  font-weight:900;
+}
+
+#mainNav{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin:34px auto 0;
+}
+
+#mainNav a{
+  min-width:120px;
+  padding:11px 15px;
+  color:#553064;
+  text-decoration:none;
+  font-weight:900;
+  border-radius:999px;
+  border:1px solid rgba(143,106,179,.22);
+  background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(255,236,244,.82));
+  box-shadow:0 12px 26px rgba(143,106,179,.13),inset 0 1px 0 rgba(255,255,255,.94);
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+}
+
+#mainNav a:hover{
+  transform:translateY(-4px);
+  background:linear-gradient(180deg,#fff,#ffe2ef);
+  box-shadow:0 18px 36px rgba(143,106,179,.22);
+}
+
+main{
+  width:min(1160px,100%);
+  margin:auto;
+  padding:18px 20px 70px;
+}
+
+section,.quizPanel{
+  scroll-margin-top:24px;
+}
+
+section{
+  margin-top:44px;
+}
+
+.sectionHead{
+  max-width:720px;
+}
+
+.sectionHead.center{
+  margin:0 auto 24px;
+  text-align:center;
+}
+
+.sectionHead p{
+  margin:0;
+  color:var(--soft-ink);
+}
+
+h2{
+  margin:0 0 12px;
+  color:#61347d;
+  font-family:"Shippori Mincho",serif;
+  font-size:clamp(30px,4vw,46px);
+  line-height:1.25;
+}
+
+h3{
+  font-family:"Shippori Mincho",serif;
+}
+
+.dailyPanel{
+  display:grid;
+  grid-template-columns:minmax(240px,340px) 1fr;
+  gap:24px;
+  align-items:stretch;
+  margin-top:-12px;
+}
+
+.questionCard,.calendarPanel,.quoteSection,.quizPanel,.gradeBox,.guideCard{
+  border:1px solid rgba(255,255,255,.82);
+  border-radius:18px;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.92),rgba(255,241,246,.88)),
+    linear-gradient(90deg,rgba(201,154,46,.08) 1px,transparent 1px);
+  box-shadow:var(--shadow);
+}
+
+.questionCard{
+  position:relative;
+  min-height:176px;
+  display:grid;
+  align-content:center;
+  padding:32px;
+  overflow:hidden;
+  font-family:"Shippori Mincho",serif;
+  font-size:24px;
+}
+
+.questionCard::before{
+  content:"";
+  position:absolute;
+  inset:12px;
+  border:1px solid rgba(201,154,46,.28);
+  border-radius:14px;
+  pointer-events:none;
+}
+
+.answerLine{
+  display:inline-block;
+  margin-top:14px;
+  color:var(--red);
+  font-weight:700;
+}
+
+.dailyAnswerButton{
+  width:min(220px,100%);
+  margin-top:18px;
+  border:0;
+  border-radius:999px;
+  color:#fff;
+  background:linear-gradient(135deg,#8f6ab3,#d6759f);
+  padding:10px 16px;
+  cursor:pointer;
+  font-family:inherit;
+  font-weight:900;
+  box-shadow:0 14px 28px rgba(143,106,179,.2);
+}
+
+.dailyHint{
+  display:block;
+  margin-top:12px;
+  color:#755f72;
+  font-family:"Noto Sans JP",sans-serif;
+  font-size:14px;
+}
+
+.guideGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+
+.guideCard{
+  display:block;
+  position:relative;
+  min-height:220px;
+  padding:26px;
+  overflow:hidden;
+  color:var(--ink);
+  text-decoration:none;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.guideCard:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-strong);
+}
+
+.guideCard::after{
+  content:"";
+  position:absolute;
+  right:-36px;
+  bottom:-38px;
+  width:146px;
+  height:146px;
+  border-radius:50%;
+  background:linear-gradient(135deg,rgba(255,229,156,.72),rgba(246,182,200,.44));
+}
+
+.guideNumber{
+  display:inline-grid;
+  place-items:center;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  color:#fff;
+  background:linear-gradient(135deg,var(--violet),#d67ca7);
+  font-family:"Shippori Mincho",serif;
+  font-weight:700;
+  box-shadow:0 12px 24px rgba(143,106,179,.24);
+}
+
+.guideCard h3{
+  position:relative;
+  margin:20px 0 8px;
+  color:#61347d;
+  font-size:25px;
+}
+
+.guideCard p{
+  position:relative;
+  margin:0;
+  color:var(--soft-ink);
+}
+
+.calendarPanel{
+  display:grid;
+  grid-template-columns:1fr minmax(240px,330px);
+  gap:24px;
+  align-items:center;
+  padding:30px;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.94),rgba(255,236,218,.9)),
+    radial-gradient(circle at 90% 12%,rgba(255,229,156,.56),transparent 34%);
+}
+
+.calendarPanel p{
+  margin:0;
+  color:var(--soft-ink);
+}
+
+.monthNameList{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:20px;
+}
+
+.monthName{
+  padding:10px 12px;
+  border-radius:12px;
+  background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(255,230,238,.72));
+  box-shadow:inset 0 0 0 1px rgba(201,154,46,.18),0 10px 22px rgba(143,106,179,.1);
+}
+
+.monthName strong{
+  display:block;
+  color:#61347d;
+  font-family:"Shippori Mincho",serif;
+  font-size:18px;
+}
+
+.monthName span{
+  display:block;
+  color:#755f72;
+  font-size:12px;
+  line-height:1.55;
+}
+
+.calendarCard{
+  padding:24px;
+  border-radius:16px;
+  color:#4f315e;
+  background:linear-gradient(145deg,#fff7dc,#ffe4ee);
+  box-shadow:inset 0 0 0 1px rgba(201,154,46,.25),0 18px 36px rgba(143,106,179,.16);
+  text-align:center;
+}
+
+.calendarCard span,.calendarCard small{
+  display:block;
+  color:#756272;
+}
+
+.calendarCard strong{
+  display:block;
+  margin:8px 0;
+  font-family:"Shippori Mincho",serif;
+  font-size:30px;
+  color:#8a4b8f;
+}
+
+.quoteSection{
+  padding:30px;
+}
+
+.quoteBox{
+  position:relative;
+  max-width:850px;
+  min-height:174px;
+  margin:0 auto;
+  padding:34px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#fffdf7,#fff0f5);
+  box-shadow:inset 0 0 0 1px rgba(201,154,46,.2),0 18px 36px rgba(143,106,179,.12);
+}
+
+.quoteBox::before{
+  content:"";
+  position:absolute;
+  left:24px;
+  top:22px;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:radial-gradient(circle,#ffe59c,#f6b6c8);
+  opacity:.55;
+}
+
+.quoteText{
+  position:relative;
+  margin:0;
+  color:#3d2f3e;
+  font-family:"Shippori Mincho",serif;
+  font-size:clamp(22px,3vw,31px);
+  line-height:1.65;
+}
+
+.quoteMeta{
+  position:relative;
+  margin:18px 0 0;
+  color:#775b77;
+  font-weight:700;
+}
+
+.subButton{
+  display:block;
+  width:min(260px,100%);
+  margin:20px auto 0;
+  border:0;
+  border-radius:999px;
+  color:#fff;
+  background:linear-gradient(135deg,var(--violet),#d6759f);
+  padding:12px 20px;
+  cursor:pointer;
+  font-family:inherit;
+  font-weight:900;
+  box-shadow:0 16px 32px rgba(143,106,179,.22);
+}
+
+.subButton:hover{
+  filter:brightness(1.05);
+}
+
+#worksheets{
+  text-align:center;
+}
+
+.scrollBox{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+
+.gradeBox{
+  text-align:left;
+  padding:24px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,242,219,.9)),
+    radial-gradient(circle at 90% 8%,rgba(217,204,255,.54),transparent 36%);
+}
+
+.gradeBox h3{
+  margin:0 0 16px;
+  padding-bottom:12px;
+  color:#61347d;
+  font-size:27px;
+  border-bottom:2px solid rgba(214,124,167,.38);
+}
+
+.gradeBox ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.gradeBox li+li{
+  margin-top:8px;
+}
+
+.gradeBox a{
+  display:block;
+  padding:9px 10px;
+  border-radius:10px;
+  color:#3d3340;
+  text-decoration:none;
+  background:rgba(255,255,255,.42);
+  transition:transform .18s ease,background .18s ease,color .18s ease,box-shadow .18s ease;
+}
+
+.gradeBox a::before{
+  content:"PDF";
+  display:inline-block;
+  margin-right:8px;
+  padding:1px 7px;
+  border-radius:999px;
+  color:#fff;
+  background:linear-gradient(135deg,#c99a2e,#d67ca7);
+  font-size:11px;
+  font-weight:900;
+}
+
+.gradeBox a:hover{
+  transform:translateX(5px);
+  color:#61347d;
+  background:#fff;
+  box-shadow:0 10px 20px rgba(143,106,179,.14);
+}
+
+.quizGrid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+
+.quizPanel{
+  padding:24px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.94),rgba(244,237,255,.88)),
+    radial-gradient(circle at 88% 12%,rgba(255,229,156,.5),transparent 36%);
+}
+
+.quizPanel h2{
+  font-size:29px;
+}
+
+.quizLead{
+  margin:-4px 0 16px;
+  color:var(--soft-ink);
+}
+
+.quizQuestion{
+  min-height:86px;
+  display:grid;
+  align-items:center;
+  padding:18px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#fffaf0,#fff0f5);
+  box-shadow:inset 0 0 0 1px rgba(201,154,46,.2);
+  color:#312634;
+  font-weight:900;
+}
+
+.choices{
+  margin-top:16px;
+}
+
+.choice{
+  width:100%;
+  padding:12px 14px;
+  margin:10px 0;
+  border:1px solid rgba(143,106,179,.22);
+  border-radius:14px;
+  cursor:pointer;
+  text-align:center;
+  background:linear-gradient(180deg,#fff,#fff5df);
+  color:#332838;
+  font-family:inherit;
+  font-weight:900;
+  box-shadow:0 10px 20px rgba(143,106,179,.08);
+  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+}
+
+.choice:hover{
+  transform:translateY(-3px);
+  background:linear-gradient(180deg,#fff,#ffe6ef);
+  box-shadow:0 16px 26px rgba(143,106,179,.16);
+}
+
+.choice.correct{
+  background:linear-gradient(180deg,#f2fff2,#dff3d9);
+  border-color:#6aa85f;
+  color:#245c29;
+}
+
+.choice.wrong{
+  background:linear-gradient(180deg,#fff1f1,#f8d6d8);
+  border-color:#c85a64;
+  color:#7a2430;
+}
+
+.result{
+  min-height:42px;
+  margin-top:12px;
+  color:#633777;
+  font-weight:900;
+  text-align:center;
+}
+
+.quizPanel > button{
+  display:block;
+  width:100%;
+  margin:18px 0 0;
+  border:0;
+  border-radius:999px;
+  color:#fff;
+  background:linear-gradient(135deg,#8f6ab3,#d6759f);
+  padding:12px 18px;
+  cursor:pointer;
+  font-family:inherit;
+  font-weight:900;
+  box-shadow:0 16px 30px rgba(143,106,179,.24);
+}
+
+.quizPanel > button:hover{
+  filter:brightness(1.06);
+}
+
+.topButton{
+  margin:38px 0 0;
+  text-align:center;
+}
+
+.topButton a{
+  display:inline-block;
+  padding:11px 20px;
+  border-radius:999px;
+  color:#61347d;
+  text-decoration:none;
+  font-weight:900;
+  background:rgba(255,255,255,.76);
+  box-shadow:0 12px 26px rgba(143,106,179,.14);
+}
+
+footer{
+  text-align:center;
+  padding:30px 20px;
+  color:#7a6578;
+}
+
+.fade{
+  opacity:0;
+  transform:translateY(34px);
+  transition:opacity .85s ease,transform .85s ease;
+}
+
+.fade.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media (max-width:980px){
+  .dailyPanel,.guideGrid,.scrollBox,.quizGrid,.calendarPanel{
+    grid-template-columns:1fr;
   }
-];
 
-const kanji = [
-  ["あっとう","圧倒"],
-  ["いじ","維持"],
-  ["いよく","意欲"],
-  ["えんかつ","円滑"],
-  ["おうぼ","応募"],
-  ["かいしゃく","解釈"],
-  ["かくじゅう","拡充"],
-  ["かんけつ","簡潔"],
-  ["かんよう","寛容"],
-  ["きょうちょう","協調"],
-  ["けいしょう","継承"],
-  ["けんとう","検討"],
-  ["こうけん","貢献"],
-  ["さくげん","削減"],
-  ["しさく","施策"],
-  ["しんちょう","慎重"],
-  ["すいこう","推敲"],
-  ["せいみつ","精密"],
-  ["たいしょう","対象"],
-  ["たんてき","端的"],
-  ["ちゅうしょう","抽象"],
+  .hero{
+    min-height:auto;
+  }
+
+  .moonObject{
+    width:88px;
+    height:88px;
+    opacity:.78;
+  }
+}
+
+@media (max-width:560px){
+  .heroInner{
+    padding:24px 0;
+  }
+
+  #mainNav a{
+    min-width:calc(50% - 8px);
+    padding:10px 8px;
+    font-size:13px;
+  }
+
+  .dateRibbon{
+    align-items:stretch;
+  }
+
+  .dateRibbon div{
+    width:100%;
+    justify-content:center;
+  }
+
+  .questionCard,.calendarPanel,.quoteSection,.quizPanel,.gradeBox,.guideCard{
+    border-radius:14px;
+    padding:20px;
+  }
+
+  .monthNameList{
+    grid-template-columns:1fr;
+  }
+}
