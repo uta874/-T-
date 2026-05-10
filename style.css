@@ -1,99 +1,100 @@
-const formatter = new Intl.DateTimeFormat(
+const warekiFormatter = new Intl.DateTimeFormat(
   "ja-JP-u-ca-japanese",
-  { era:"long", year:"numeric", month:"numeric", day:"numeric", weekday:"long" }
+  { era:"long", year:"numeric", month:"long", day:"numeric", weekday:"long" }
 );
 
-document.getElementById("wareki").textContent = formatter.format(new Date());
+const kyurekiFormatter = new Intl.DateTimeFormat(
+  "ja-JP-u-ca-chinese",
+  { year:"numeric", month:"long", day:"numeric" }
+);
+
+const today = new Date();
+const wareki = warekiFormatter.format(today);
+let kyureki = "";
+
+try{
+  kyureki = kyurekiFormatter.format(today);
+}catch(error){
+  kyureki = "表示に対応していません";
+}
+
+document.getElementById("wareki").textContent = wareki;
+document.getElementById("kyureki").textContent = kyureki;
+document.getElementById("kyurekiLarge").textContent = kyureki;
 
 const dailyQ = [
-  ["徒然草の作者は？","吉田兼好"],
-  ["枕草子の作者は？","清少納言"],
-  ["俳句の音数は？","5-7-5"],
-  ["奥の細道の作者は？","松尾芭蕉"],
-  ["竹取物語の主人公は？","かぐや姫"],
-  ["『走れメロス』の作者は？","太宰治"]
+  ["徒然草の作者は？","吉田兼好","随筆文学の代表作です。"],
+  ["枕草子の作者は？","清少納言","平安時代の感性を知る入口になります。"],
+  ["俳句の基本的な音数は？","5・7・5","季語が入ることも大切です。"],
+  ["奥の細道の作者は？","松尾芭蕉","俳諧紀行文として有名です。"],
+  ["竹取物語の主人公は？","かぐや姫","日本最古級の物語とされます。"],
+  ["『走れメロス』の作者は？","太宰治","友情と信頼が主題として読まれます。"],
+  ["『山月記』の主人公は？","李徴","人間の自尊心や不安を考える作品です。"],
+  ["短歌の基本的な音数は？","5・7・5・7・7","和歌の学習にもつながります。"]
 ];
 
-const quotes = [
-  "学ぶとは、言葉で世界を少し明るく見ること。",
-  "読む力は、考える力の入口である。",
-  "一語を選ぶことは、一つの景色を選ぶこと。",
-  "古典は、昔の人から届いた長い手紙である。"
+const literaryQuotes = [
+  {
+    text:"吾輩は猫である。名前はまだ無い。",
+    meta:"夏目漱石『吾輩は猫である』"
+  },
+  {
+    text:"山路を登りながら、こう考えた。",
+    meta:"夏目漱石『草枕』"
+  },
+  {
+    text:"メロスは激怒した。",
+    meta:"太宰治『走れメロス』"
+  },
+  {
+    text:"恥の多い生涯を送って来ました。",
+    meta:"太宰治『人間失格』"
+  },
+  {
+    text:"隴西の李徴は博学才穎、天宝の末年、若くして名を虎榜に連ねた。",
+    meta:"中島敦『山月記』"
+  },
+  {
+    text:"或日の暮方の事である。",
+    meta:"芥川龍之介『羅生門』"
+  },
+  {
+    text:"石炭をば早や積み果てつ。",
+    meta:"森鴎外『舞姫』"
+  },
+  {
+    text:"やまなし、やまなし、やまなし。",
+    meta:"宮沢賢治『やまなし』"
+  },
+  {
+    text:"春はあけぼの。",
+    meta:"清少納言『枕草子』"
+  },
+  {
+    text:"つれづれなるままに、日暮らし、硯にむかひて。",
+    meta:"吉田兼好『徒然草』"
+  }
 ];
 
 const kanji = [
-  ["とうそつ","統率"],
-  ["しんちょう","慎重"],
-  ["たいしょう","対象"],
+  ["あっとう","圧倒"],
+  ["いじ","維持"],
+  ["いよく","意欲"],
+  ["えんかつ","円滑"],
+  ["おうぼ","応募"],
+  ["かいしゃく","解釈"],
+  ["かくじゅう","拡充"],
+  ["かんけつ","簡潔"],
+  ["かんよう","寛容"],
+  ["きょうちょう","協調"],
+  ["けいしょう","継承"],
   ["けんとう","検討"],
-  ["しょうさい","詳細"],
-  ["はあく","把握"],
-  ["かくしん","確信"],
-  ["ていあん","提案"]
-];
-
-const kokugoQuestions = [
-  {
-    question:"物語の出来事が起こる時間や場所のことを何という？",
-    answer:"設定",
-    choices:["設定","主題","比喩"]
-  },
-  {
-    question:"『白い雲のようだ』のように、たとえる言い方は？",
-    answer:"直喩",
-    choices:["直喩","倒置","反復"]
-  },
-  {
-    question:"文章全体を通して筆者が最も伝えたいことは？",
-    answer:"要旨",
-    choices:["要旨","段落","接続語"]
-  },
-  {
-    question:"反対の意味をもつ語の組み合わせは？",
-    answer:"対義語",
-    choices:["対義語","類義語","多義語"]
-  }
-];
-
-const kobunWords = [
-  {
-    question:"『いと』の意味は？",
-    answer:"とても",
-    choices:["とても","少し","すぐに"]
-  },
-  {
-    question:"『をかし』の意味は？",
-    answer:"趣がある",
-    choices:["趣がある","悲しい","眠い"]
-  },
-  {
-    question:"『あはれ』の意味は？",
-    answer:"しみじみとした趣",
-    choices:["しみじみとした趣","速い","正しい"]
-  },
-  {
-    question:"『ありがたし』の意味は？",
-    answer:"めったにない",
-    choices:["めったにない","ありがとう","簡単だ"]
-  }
-];
-
-let k = 0;
-let q = 0;
-let b = 0;
-const badgeSet = new Set();
-
-function pickDaily(){
-  const dq = dailyQ[Math.floor(Math.random() * dailyQ.length)];
-  document.getElementById("dailyQuestion").innerHTML =
-    `<span>${dq[0]}</span><span class="answerLine">答え：${dq[1]}</span>`;
-}
-
-function pickQuote(){
-  document.getElementById("quoteBox").textContent =
-    quotes[Math.floor(Math.random() * quotes.length)];
-}
-
-function shuffle(items){
-  return [...items].sort(() => Math.random() - 0.5);
-}
+  ["こうけん","貢献"],
+  ["さくげん","削減"],
+  ["しさく","施策"],
+  ["しんちょう","慎重"],
+  ["すいこう","推敲"],
+  ["せいみつ","精密"],
+  ["たいしょう","対象"],
+  ["たんてき","端的"],
+  ["ちゅうしょう","抽象"],
